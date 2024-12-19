@@ -1,0 +1,98 @@
+Title: Reinforcement Learning Game Environment
+
+1. Introduction
+    This project explores the design, implementation, and analysis of a 2D game environment where reinforcement learning (RL) agents can learn optimal policies. The goal is to apply three different RL algorithms to train agents and compare their performance in tasks such as reaching goals, avoiding obstacles, and collecting rewards.
+
+The three RL algorithms implemented are:
+    1- Dynamic Programming (Policy Iteration or Value Iteration)
+    2- Temporal Difference Learning (Q-Learning or SARSA)
+    3- Policy-Based Method (Policy Gradient)
+
+2. Game Environment Design
+    The environment for this project is a 2D Gridworld. In this environment, the agent moves within a grid to reach a goal while avoiding obstacles and collecting rewards. The key components of the environment include:
+
+    - Grid Layout: The grid consists of cells arranged in a square layout. The agent starts at a random position and must reach a predefined goal position.
+    - Obstacles: Fixed obstacles that the agent must avoid in order to reach the goal.
+    - Rewards: Items scattered across the grid that provide positive reinforcement when collected by the agent.
+    - Goal: A designated endpoint on the grid where the agent receives a high reward for reaching.
+
+    The following Python libraries were used for the implementation:
+        - Pygame for visualizing the 2D environment.
+        - Matplotlib for plotting the results.
+
+
+3. Reinforcement Learning Algorithms
+    3.1 Dynamic Programming (Policy Iteration)
+    Dynamic programming methods such as Policy Iteration rely on knowledge of the environment’s full dynamics (transition probabilities and rewards). The key steps involved in Policy Iteration are:
+        1- Policy Evaluation: Estimate the value function for a given policy.
+        2- Policy Improvement: Improve the policy based on the value function until convergence.
+
+    3.2 Temporal Difference Learning (Q-Learning)
+        Q-Learning is a model-free reinforcement learning algorithm. It involves the following key update rule: 
+            - 𝑄(𝑠𝑡,𝑎𝑡)←𝑄(𝑠𝑡,𝑎𝑡)+𝛼(𝑟𝑡+1+𝛾max⁡𝑎 𝑄(𝑠𝑡+1,𝑎)−𝑄(𝑠𝑡,𝑎𝑡))Q(st,at)←Q(st,at)+α(rt+1+γmaxaQ(st+1,a)−Q(st,at)) where:
+            - 𝑄(𝑠𝑡,𝑎𝑡)Q(st​,at) is the Q-value (action-value function) for the state-action pair. 
+            - 𝛼 is the learning rate, and 𝛾 is the discount factor.
+
+    3.3 Policy-Based Method (Policy Gradient)
+        Policy Gradient methods aim to directly optimize the policy using gradient-based optimization. The key idea is to adjust the policy parameters in the direction that maximizes the expected return.
+
+    4. Experimental Setup
+        The experiments were conducted using the following setup:
+            - Grid Size: 10x10 grid with obstacles, rewards, and goal.
+            - Agent Action Space: Up, Down, Left, Right.
+            - Learning Rate (𝛼): 0.1 for Q-learning and Policy Gradient.
+            - Discount Factor (𝛾): 0.9 for all algorithms.
+            - Exploration Rate (𝜖): 0.1 for Q-learning (epsilon-greedy policy).
+        
+        Each algorithm was tested across 1000 episodes, and the results were analyzed based on:
+            - Reward accumulated per episode.
+            - Number of episodes to converge to an optimal policy.
+            - Computational efficiency.
+
+5. Experimental Results
+    
+    5.1 Performance Comparison
+        The performance of the three algorithms was evaluated based on their ability to learn optimal policies and maximize the reward in the shortest number of episodes. The following key metrics were used for comparison:
+            - Convergence Speed: Time taken (in episodes) for the agent to reach a stable policy.
+            - Reward Accumulation: Average reward per episode.
+            - Computational Efficiency: Time taken for training and convergence.
+    
+    5.2 Results for Q-Learning
+        The Q-learning agent demonstrated consistent learning over time and was able to accumulate rewards efficiently. The agent explored the environment initially (with 𝜖-greedy exploration) before exploiting the learned policy.
+    
+    5.3 Results for Policy Gradient
+        The Policy Gradient agent showed slower learning in comparison to Q-learning, especially in environments with a larger number of obstacles.
+    
+    5.4 Results for Policy Iteration
+        Policy Iteration converged quickly, but its performance heavily depended on the accuracy of the initial value function and policy. This method was efficient when a complete model of the environment was available.
+    
+    5.5 Comparison of Algorithms
+        Graphical comparison of the learning curves is shown in the figures below:
+            - Figure 1: Reward vs. Episodes for Q-learning, Policy Gradient, and Policy Iteration.
+            - Figure 2: Convergence Plot for all three algorithms.
+
+6. Challenges and Solutions
+    Throughout the project, several challenges were encountered:
+        - Challenge 1: Q-learning faced difficulties in environments with many obstacles, as the agent would often get stuck.
+            - Solution: We tuned the exploration-exploitation balance and increased the discount factor to allow the agent to plan further ahead.
+        
+        - Challenge 2: Policy Gradient exhibited slow convergence due to the large state space.
+            - Solution: We experimented with different neural network architectures to improve the efficiency of policy updates.
+
+7. Conclusion
+    In conclusion, each reinforcement learning algorithm has its strengths and weaknesses:
+        - Policy Iteration was fast and efficient but requires a model of the environment.
+        - Q-Learning was robust in dynamic environments but required careful tuning of parameters.
+        - Policy Gradient showed the potential for more complex environments but needed more training time.
+
+    Future work could include enhancing the Policy Gradient agent by incorporating deeper neural networks or implementing more sophisticated exploration strategies.
+
+8. Future Work
+    - Investigating the use of Deep Q-Networks (DQN) for handling larger state spaces.
+    - Testing multi-agent reinforcement learning for cooperative or competitive agent behaviors.
+    - Exploring different grid configurations or adding new obstacles to evaluate algorithm performance under varying conditions.
+
+9. References
+    - Sutton, R. S., & Barto, A. G. (2018). Reinforcement Learning: An Introduction. MIT Press.
+    - Watkins, C. J. C. H., & Dayan, P. (1992). Q-learning. Machine Learning, 8(3-4), 279-292.
+    - Silver, D., et al. (2016). Mastering the game of Go with deep neural networks and tree search. Nature, 529, 484–489.
