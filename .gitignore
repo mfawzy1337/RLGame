@@ -54,7 +54,6 @@ debug.log
 results/
 *.png
 *.csv
-*.txt
 
 # Documentation
 report/*.docx
